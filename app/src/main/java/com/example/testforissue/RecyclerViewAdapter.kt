@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class RecyclerViewAdapter(val context: Context?, val list: ArrayList<String>):
+class RecyclerViewAdapter(private val viewModel: MyViewModel, val context: Context?, val list: ArrayList<String>):
     RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewViewHolder>() {
 
 
@@ -26,17 +26,17 @@ class RecyclerViewAdapter(val context: Context?, val list: ArrayList<String>):
 
     override fun getItemCount(): Int {
         // 검색결과에 표시될 item 개수
-        return list.size
+        return viewModel.items.size
     }
 
     inner class RecyclerViewViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val SearchResult: TextView = itemView.findViewById(R.id.textView)
 
         fun setContents(pos: Int){
-            with(pos){
+            with(viewModel.items[pos]){
                 //세팅
 //                SearchResult.setImageResource(R.drawable.trailer_search_sample_image)
-                SearchResult.text = list[pos]
+                SearchResult.text = cities
             }
 
             /*
