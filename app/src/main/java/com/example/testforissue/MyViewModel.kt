@@ -9,6 +9,9 @@ class MyViewModel: ViewModel() {
     val itemsListData = MutableLiveData<ArrayList<Item>>()
     val items = ArrayList<Item>()
 
+    val queryitemsListData = MutableLiveData<ArrayList<Item>>()
+    val queryitems = ArrayList<Item>()
+
     /* follower list 관련 */
 
     fun addItem(item: Item){
@@ -20,5 +23,17 @@ class MyViewModel: ViewModel() {
         items.removeAt(pos)
         itemsListData.value = items
     }
+
+    fun addQueryItem(item: Item){
+        queryitems.add(item)
+        queryitemsListData.value = queryitems
+    }
+
+    fun deleteQueryItemAll(){
+        queryitems.clear()
+        queryitemsListData.value = queryitems
+    }
+
+
 
 }
