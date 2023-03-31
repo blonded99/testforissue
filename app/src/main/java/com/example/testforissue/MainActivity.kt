@@ -1,20 +1,25 @@
 package com.example.testforissue
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.AttributeSet
 import android.util.Log
-import android.view.KeyEvent
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.example.testforissue.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var viewModel: MyViewModel
     lateinit var binding: ActivityMainBinding
 
+    private var list = ArrayList<String>() // post image 넘어오는 array
+
+    private val adapter = ViewPagerAdapter(list)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +27,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel = ViewModelProvider(this)[MyViewModel::class.java]
-//        viewModel = ViewModelProvider(this).get(MyViewModel::class.java)
+
+        list.add("R.drawable.helmet")
+        list.add("R.drawable.helmet")
+
+        binding.bodyImage.adapter = adapter
+        binding.bodyImage.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+
+        binding.button.setOnClickListener {
+            binding.bodyImage.adapter?.notifyDataSetChanged()
+        }
+
+        /*
 
         val list = ArrayList<String>()
         list.add("서울")
@@ -46,28 +63,33 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView2.layoutManager = LinearLayoutManager(applicationContext)
 
 
-//        binding.button.setOnClickListener {
-//            viewModel.addItem(Item(binding.editText.text.toString()))
-//        }
 
         viewModel.itemsListData.observe(this){
             RecyclerViewAdapter(viewModel,applicationContext).notifyDataSetChanged()
         }
 
         viewModel.queryitemsListData.observe(this){
+            println("observer called")
             RecyclerViewAdapter2(viewModel,applicationContext).notifyDataSetChanged()
         }
 
         binding.editText.addTextChangedListener(object: TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//                RecyclerViewAdapter2(viewModel,applicationContext).notifyDataSetChanged()
+                Log.e("t","beforeTextChanged Called")
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val text = binding.editText.text
-
-
                 Log.e("onTextChange","onTextChanged called")
+
+
+
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                Log.e("t","afterTextChanged Called")
+
+                val text = binding.editText.text
 
                 if(text.isNotEmpty()){
                     viewModel.deleteQueryItemAll()
@@ -78,7 +100,6 @@ class MainActivity : AppCompatActivity() {
                     viewModel.items.forEach{
                         if(it.cities.contains(text)) {
                             viewModel.addQueryItem(it)
-//                            RecyclerViewAdapter2(viewModel,applicationContext).notifyDataSetChanged()
                         }
                     }
                 }
@@ -86,37 +107,21 @@ class MainActivity : AppCompatActivity() {
                     viewModel.deleteQueryItemAll()
                     binding.recyclerView2.visibility= View.GONE
                     binding.recyclerView.visibility= View.VISIBLE
-//                    RecyclerViewAdapter2(viewModel,applicationContext).notifyDataSetChanged()
                 }
 
                 viewModel.queryitems.forEach {
                     System.out.println(it.cities)
                 }
 
-
-                RecyclerViewAdapter2(viewModel,applicationContext).notifyDataSetChanged()
-
-
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-//                RecyclerViewAdapter2(viewModel,applicationContext).notifyDataSetChanged()
             }
 
 
         })
 
+        */
+
 
     }
 
-//    override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
-//        return when (keyCode) {
-//            KeyEvent.KEYCODE_DEL -> {
-//                viewModel.deleteQueryItemAll()
-//                Log.e("test","delete key pushed")
-//                true
-//            }
-//            else -> super.onKeyUp(keyCode, event)
-//        }
-//    }
+
 }

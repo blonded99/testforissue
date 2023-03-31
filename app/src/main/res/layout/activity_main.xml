@@ -24,6 +24,29 @@
             android:orientation="vertical">
 
 
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/body_image"
+                android:layout_width="match_parent"
+                android:layout_height="379dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="16dp"
+                android:background="@color/gray03"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="156dp"
+                android:layout_marginTop="140dp"
+                android:text="Button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/body_image" />
+
+            <!--
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
@@ -63,6 +86,8 @@
                 android:text="Button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            -->
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

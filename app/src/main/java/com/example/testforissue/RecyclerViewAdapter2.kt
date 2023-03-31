@@ -15,12 +15,14 @@ class RecyclerViewAdapter2(private val viewModel: MyViewModel, val context: Cont
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_view2,
             parent, false)
+        println("onCreateViewHolder called")
 //        val inflater = LayoutInflater.from(parent.context)
 //        val binding = ItemViewBinding.inflate(inflater,parent,false)
         return RecyclerViewViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: RecyclerViewViewHolder, position: Int) {
+        println("onBindViewHolder called: ${position}")
         holder.setContents(position)
     }
 
@@ -36,6 +38,7 @@ class RecyclerViewAdapter2(private val viewModel: MyViewModel, val context: Cont
             with(viewModel.queryitems[pos]){
                 //세팅
 //                SearchResult.setImageResource(R.drawable.trailer_search_sample_image)
+                println("도시${pos}: ${cities}")
                 SearchResult.text = cities
             }
 
